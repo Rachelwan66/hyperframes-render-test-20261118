@@ -1,0 +1,17 @@
+<template><style>
+#root{position:absolute;inset:0;background:#102b32}
+#motion-stage{position:absolute;inset:0}
+.shape{position:absolute;top:370px;width:240px;height:240px}
+#motion-circle{left:300px;background:#ffcf70;border-radius:50%}
+#motion-square{left:840px;background:#76d6c5;border-radius:24px}
+#motion-ring{left:1380px;border:32px solid #ff8b78;border-radius:50%;box-sizing:border-box}
+#motion-track{position:absolute;left:300px;top:820px;width:1320px;height:16px;background:#35545a;border-radius:8px;overflow:hidden}
+#motion-progress{width:100%;height:100%;background:#f3eee3;transform-origin:left center}
+</style><div data-hf-id="hf-v06p" id="root" data-composition-id="motion" data-width="1920" data-height="1080"><div data-hf-id="hf-638x" id="motion-stage" class="clip" data-start="0" data-duration="6"><div data-hf-id="hf-ngm0" id="motion-circle" class="shape"></div><div data-hf-id="hf-c089" id="motion-square" class="shape"></div><div data-hf-id="hf-sxcy" id="motion-ring" class="shape"></div><div data-hf-id="hf-g4ol" id="motion-track"><div data-hf-id="hf-b4zd" id="motion-progress"></div></div></div></div><script>
+const tl=gsap.timeline({paused:true});
+tl.fromTo('#motion-circle',{y:0},{y:-130,duration:1.5,ease:'sine.inOut'},0).to('#motion-circle',{y:0,duration:1.5,ease:'sine.inOut'},1.5).to('#motion-circle',{y:-130,duration:1.5,ease:'sine.inOut'},3).to('#motion-circle',{y:0,duration:1.4,ease:'sine.inOut'},4.5);
+tl.fromTo('#motion-square',{rotation:0},{rotation:180,duration:5.9,ease:'none'},0);
+tl.fromTo('#motion-ring',{scale:1},{scale:.65,duration:2.95,ease:'sine.inOut'},0).to('#motion-ring',{scale:1,duration:2.95,ease:'sine.inOut'},2.95);
+tl.fromTo('#motion-progress',{scaleX:0},{scaleX:1,duration:5.9,ease:'none'},0);
+window.__timelines.motion=tl;
+</script></template>
