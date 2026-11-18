@@ -20,12 +20,18 @@ jobs:
           node-version: '24.14.0'
       - name: Prepare browser and pinned dependencies
         run: |
-          command -v ffmpeg
-          command -v ffprobe
-          browser=$(command -v google-chrome)
+          if ! command -v ffmpeg || ! command -v ffprobe; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+          npm install --no-audit --no-fund --no-save hyperframes@0.9.7 gsap@3.15.0
+          if ! command -v google-chrome; then
+            node_modules/.bin/hyperframes browser ensure
+          fi
+          browser=$(command -v google-chrome || node_modules/.bin/hyperframes browser path)
+          test -x "$browser"
           echo "CHROME_PATH=$browser" >> "$GITHUB_ENV"
           "$browser" --version
-          npm install --no-audit --no-fund --no-save hyperframes@0.9.7 gsap@3.15.0
           mkdir -p assets
           cp node_modules/gsap/dist/gsap.min.js assets/
           sha256sum --check gsap.sha256
